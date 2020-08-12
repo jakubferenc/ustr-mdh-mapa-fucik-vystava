@@ -378,7 +378,7 @@ gulp.task('fonts', () => gulp.src('src/fonts/**/*.*')
     .pipe(gulp.dest('dist/assets/fonts')));
 
 gulp.task('mergeJson', () => {
-  return gulp.src('./data/**/*.json')
+  gulp.src('./data/**/*.json')
   .pipe($.mergeJson({
     fileName: 'data_merged.json',
   }))
@@ -386,10 +386,6 @@ gulp.task('mergeJson', () => {
 });
 ;
 
-gulp.task('copyToDist', () => {
-  return gulp.src('.htaccess')
-  .pipe(gulp.dest('./dist/'));
-});
 
 
 
@@ -402,7 +398,7 @@ gulp.watch('src/*.html', gulp.series(browserSync.reload));
 gulp.watch(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'], gulp.series('images'));
 
 // GULP:build
-gulp.task('build', gulp.series('clean', 'mergeJson', 'pug', 'sass', 'js', 'images', 'fonts', 'copyToDist'));
+gulp.task('build', gulp.series('clean', 'mergeJson', 'pug', 'sass', 'js', 'images', 'fonts'));
 
 // GULP:default
 gulp.task('default', gulp.series('build'));
