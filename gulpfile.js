@@ -370,13 +370,10 @@ gulp.task('js', async () => {
 gulp.watch('src/js/**/*.js', gulp.series('js', 'reload'));
 
 // IMAGES
-gulp.task('images', () => gulp.src('src/images/**/*.{jpg,png,svg,gif}')
-    .pipe(gulp.dest('dist/assets/images')));
-
-
-
-
-
+gulp.task('images', () => {
+  return gulp.src('src/images/**/*.{jpg,png,svg,gif}')
+    .pipe(gulp.dest('dist/assets/images'));
+});
 
 
 gulp.watch(['site.webmanifest'], gulp.series('pug'));
