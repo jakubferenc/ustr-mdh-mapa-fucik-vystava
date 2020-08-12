@@ -1,5 +1,4 @@
-
-
+import { disabledEvent } from './functions.js';
 
 const domLoad = () => {
 
@@ -8,7 +7,13 @@ const domLoad = () => {
   const d = document;
   const $body = d.body;
 
-  
+  const $iframeGoogleMap = document.querySelector('#frame-google-map');
+
+  $iframeGoogleMap .onload = (e) => {
+    console.log("iframe loaded");
+
+
+  };
 
 };
 
