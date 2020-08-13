@@ -7,9 +7,9 @@ block main
 
 
   .main-container
-    .dashboard
+    section.dashboard
 
-      .side.mdh
+      .section.mdh
 
         .content
           h1 Topografie paměti: Julius Fučík
@@ -18,7 +18,7 @@ block main
           .button-container
             a.button(href="#" rel="mdh") Spustit aplikaci
 
-      .side.historylab
+      .section.historylab
 
         .content
           h1 Julius Fučík v&nbsp;aplikaci HistoryLab
@@ -30,7 +30,20 @@ block main
           .button-container
             a.button(href="#" rel="historylab") Spustit aplikaci
 
-    <iframe id="frame-mdh" allowfullscreen="false" frameborder="0" src="https://www.google.com/maps/d/embed?mid=1Jp34vUP7mnw4Q9AZJH0T3zlBPmiXDJ50&z=6&ll=50.08804,14.42076&output=embed" width="1920" height="1026"></iframe>
 
+      .section.other
+        .content
+          h1 Z archivu
+          p Další fotografie a dokumenty k tématu Julius&nbsp;Fučík
 
-    <iframe id="frame-historylab" allowfullscreen="false" frameborder="0" src="https://historylab.cz/#catalog" width="1920" height="1026"></iframe>
+          .button-container
+            a.button(href="#" rel="archive") Spustit aplikaci
+
+      .section.tiraz
+        .content
+          p Zde by mohla být tiráž, na jiném pozadí, jiný font, barva výstavy
+          p Dodat nadpis pro text této sekce
+
+    .iframe-container
+      <iframe class="frame-mdh" allowfullscreen="false" frameborder="0" src="https://www.google.com/maps/d/embed?mid=1Jp34vUP7mnw4Q9AZJH0T3zlBPmiXDJ50&z=6&ll=50.08804,14.42076&output=embed" width="1920" height="1026"></iframe>
+      <iframe class="frame-historylab" allowfullscreen="false" frameborder="0" src="https://historylab.cz/#catalog" width="1920" height="1026"></iframe>

@@ -1,28 +1,47 @@
 .dashboard {
   height: 100%;
   width: 100%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
+  display: grid;
 
-  .side {
-    padding: $base-mobile-side-margin * 4 0;
-    width: 50%;
-    border-right: 1px solid #eee;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: $base-mobile-side-margin / 2;
+
+
+  padding: $base-mobile-side-margin / 2;
+
+
+  .section {
+    padding: 0;
+    height: 100%; padding: $base-mobile-side-margin / 2;
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: flex-start;
+    align-items: center;
 
-    .content {width: 66%; margin: 0 auto;}
+    &:nth-child(1),
+    &:nth-child(4) {
+      background-color: #eee;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      background-color: #FAFAFA;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 0;
+    }
+
+    .content {
+      width: 50%;
+      margin: 0 auto;
+    }
 
     h1 {
-      font-size: 81px;
+      font-size: 42px;
       line-height: 1.1;
       margin-bottom: 3rem;
     }
     p {
-      font-size: 36px;
+      font-size: 26px;
       line-height: 1.4;
       width: 75%;
     }
@@ -30,6 +49,10 @@
 
     &.historylab {
       .logo {width: 300px;}
+    }
+
+    &.tiraz p {
+      font-size: 20px;
     }
   }
 
@@ -54,22 +77,27 @@
   display: flex;
   align-items: center;
   height: 100%;
-  width: 300%;
+  width: 200%;
 }
-
-iframe {width: 100%; height: 100%; box-sizing: border-box; padding-bottom: 50px;}
+.iframe-container {height: 100%; width: 100%; position: relative;}
+iframe {width: 100%; height: 100%; box-sizing: border-box; padding-bottom: 50px; position: absolute; top: 0; left: 0;}
 
 .main-container {
   transform: translateX(0%);
   transition: transform .5s ease-in-out;
 
 }
-
+.frame-mdh {opacity: 0; transition: opacity .5s ease-in; }
+.frame-historylab {opacity: 0; transition: opacity .5s ease-in;}
 
 body.mdh-map .main-container {
-  transform: translateX(-33.333%);
+  transform: translateX(-50%);
+  .frame-mdh {opacity: 1; z-index: 2; transition: opacity .5s ease-in; }
+  .frame-historylab {opacity: 0; z-index: 1; transition: opacity .5s ease-in; }
 }
 
 body.historylab .main-container {
-  transform: translateX(-66.666%);
+  transform: translateX(-50%);
+  .frame-mdh {opacity: 0; z-index: 1; transition: opacity .5s ease-in; }
+  .frame-historylab {opacity: 1; z-index: 2; transition: opacity .5s ease-in; }
 }

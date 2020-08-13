@@ -9,7 +9,7 @@ const domLoad = () => {
 
   // init
 
-  const $buttons = document.querySelectorAll('.side .button');
+  const $buttons = document.querySelectorAll('.dashboard .button');
 
   const $buttonBackToDashboard = document.querySelectorAll('.homepage-link');
 
