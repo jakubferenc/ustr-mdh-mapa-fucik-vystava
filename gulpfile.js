@@ -253,63 +253,6 @@ config.pug.locals = {
 };
 
 
-const prepareArticleItem = (item) => {
-
-  const data = JSON.parse(fs.readFileSync('./data/data_merged.json'));
-  const allTags = data.tags;
-
-  const thisItem = {};
-
-  // create a slug used for image name or the url of detail page
-  thisItem.slug = item.slug;
-  thisItem.title = item.title.rendered;
-  thisItem.excerpt = item.excerpt.rendered;
-  thisItem.content = item.content.rendered;
-  thisItem.date = makeCzechDateFromYMD(item.date.split('T')[0]);
-  thisItem.categories = item.categories;
-
-  // prepare tags
-  thisItem.tags = item.tags;
-  thisItem.tags.forEach( (tagID, index, arr) => {
-
-    allTags.forEach( (tagFromAllTags) => {
-      if (tagFromAllTags.id == tagID) {
-        arr[index] = tagFromAllTags.name;
-      }
-    });
-
-  });
-
-  //const isFiction = item.categories.includes(303);
-  //const isPoetry = item.categories.includes(304);
-  const isAcademic = item.categories.includes(8);
-
-  /*if (isFiction) {
-    thisItem.categoryCssClass = 'fiction-poetry';
-  } else if ( isPoetry ) {
-    thisItem.categoryCssClass = 'fiction-poetry poetry';
-  } else*/ if ( isAcademic ) {
-    thisItem.categoryCssClass = 'academic';
-  } else {
-    thisItem.categoryCssClass = 'articles';
-  }
-
-  //  html
-  gulp.src('src/views/article.pug')
-    .pipe(
-      $.data(
-        (file) => thisItem
-      )
-    )
-    .pipe($.pug({ pretty: true }))
-    .pipe($.rename('index.html'))
-    .pipe(gulp.dest(`./dist/article/${thisItem.slug}`));
-
-
-  return thisItem;
-
-};
-
 // ==========================================
 // 4. TASKS
 // ==========================================
@@ -334,9 +277,6 @@ gulp.task('reload', () => {
 // pug:index & pug:home (pug -> html)
 gulp.task('pug', () => {
   return gulp.src(['src/views/**/*.pug'])
-    .pipe(
-      $.data(() => JSON.parse(fs.readFileSync('./data/data_merged.json')))
-    )
     .pipe($.pug(config.pug))
     .pipe(gulp.dest('dist/'))
     .pipe(browserSync.stream());
