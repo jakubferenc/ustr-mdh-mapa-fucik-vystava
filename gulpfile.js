@@ -305,7 +305,7 @@ gulp.watch('src/scss/**/*.scss', gulp.series('sass', 'reload'));
 
 gulp.task('js', async () => {
   const bundle = await rollup(config.rollup.bundle);
-  bundle.write(config.rollup.output);
+  return bundle.write(config.rollup.output);
 });
 gulp.watch('src/js/**/*.js', gulp.series('js', 'reload'));
 
@@ -327,4 +327,7 @@ gulp.watch(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'], gulp.series('images'));
 gulp.task('build', gulp.series('clean', 'pug', 'sass', 'js', 'images'));
 
 // GULP:default
-gulp.task('default', gulp.series('build'));
+gulp.task('default', gulp.series('build', (cb) => {
+  cb();
+  return process.exit(1);
+}));
