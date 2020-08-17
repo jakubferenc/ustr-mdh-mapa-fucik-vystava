@@ -20,7 +20,7 @@ html {
     font-size: $base-font-size;
   }
 }
-html, body {height: 100%;}
+html, body {height: 100%; overflow: hidden;}
 body {
   font-family: 'republic-web', sans-serif;
   font-weight: 400;
@@ -46,6 +46,7 @@ a {
 
 h1, h2, h3 {
   font-weight: 200;
+  line-height: 1.2;
 }
 
 p {line-height: $base-line-height;}

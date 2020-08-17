@@ -1,14 +1,10 @@
 .dashboard {
   height: 100%;
-  width: 100%;
+  width: calc(100% - 20px);
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
   grid-gap: $base-mobile-side-margin / 2;
-
-
   padding: $base-mobile-side-margin / 2;
-
 
   .section {
     padding: 0;
@@ -41,7 +37,7 @@
       margin-bottom: 3rem;
     }
     p {
-      font-size: 26px;
+      font-size: 24px;
       line-height: 1.4;
       width: 75%;
     }
@@ -52,8 +48,18 @@
     }
 
     &.tiraz p {
-      font-size: 20px;
+      font-size: 16px;
     }
+
+    .tiraz-logos {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: $base-mobile-side-margin * 2;
+      img {margin-left: $base-mobile-side-margin * 2; width: 150px;}
+      img:first-child {margin-left: 0;}
+    }
+
   }
 
   .button {
@@ -76,28 +82,147 @@
 .main-container {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   width: 200%;
 }
-.iframe-container {height: 100%; width: 100%; position: relative;}
-iframe {width: 100%; height: 100%; box-sizing: border-box; padding-bottom: 50px; position: absolute; top: 0; left: 0;}
+.iframe-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: scroll;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+
+}
 
 .main-container {
   transform: translateX(0%);
   transition: transform .5s ease-in-out;
 
 }
-.frame-mdh {opacity: 0; transition: opacity .5s ease-in; }
-.frame-historylab {opacity: 0; transition: opacity .5s ease-in;}
+
+#legend {
+width: 800px; background: red;
+}
+
+.frame  {
+  z-index: 0;
+  position: absolute; top: 0; left: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-in;
+}
 
 body.mdh-map .main-container {
   transform: translateX(-50%);
-  .frame-mdh {opacity: 1; z-index: 2; transition: opacity .5s ease-in; }
-  .frame-historylab {opacity: 0; z-index: 1; transition: opacity .5s ease-in; }
+  .frame-mdh  {opacity: 1; z-index: 2; overflow: auto; transition: opacity .5s ease-in; }
 }
 
 body.historylab .main-container {
   transform: translateX(-50%);
-  .frame-mdh {opacity: 0; z-index: 1; transition: opacity .5s ease-in; }
-  .frame-historylab {opacity: 1; z-index: 2; transition: opacity .5s ease-in; }
+  .frame-historylab {opacity: 1; z-index: 2; overflow: auto; transition: opacity .5s ease-in; }
+}
+
+body.archive .main-container {
+  transform: translateX(-50%);
+  .frame-archive {opacity: 1; z-index: 2; overflow: auto; transition: opacity .5s ease-in; }
+}
+
+.window-info {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  position: absolute; top: 0; left: 0;
+  z-index: 1;
+}
+
+.julius-fucik-map-window-info {
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: calc(100vh - $navigation-bar-height);
+  overflow: hidden;
+
+  transform: translateY(100%);
+  transition: transform .5s ease-out;
+
+  &.is-open {
+    transform: translateY(0);
+  }
+
+  figure {
+    width: 50%;
+    img {margin-top: -5rem; width: 100%;}
+  }
+
+  .content-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: $base-mobile-side-margin * 4 0;
+    overflow: scroll;
+    height: 100vh;
+  }
+
+  .excerpt-container {
+    width: 670px;
+    h1 {
+      margin-bottom: $base-mobile-side-margin * 2;
+    }
+    p {font-size: 22px;}
+
+  }
+
+  .map-layer-info-container {
+    width: 670px;
+    margin-top: $base-mobile-side-margin * 4;
+    margin-bottom: $base-mobile-side-margin * 2;
+
+    h2 {font-size: 22px;}
+    .layer {
+      height: 100px;
+      display: flex;
+      align-items: flex-start; justify-content: center;
+      border-radius: 8px;
+      background: #eee;
+      padding: $base-mobile-side-margin;
+      box-sizing: border-box;
+      margin-top: $base-mobile-side-margin;
+    }
+    .name {width: 40%; max-width: 372px; padding-right: $base-mobile-side-margin; font-size: 21px;}
+    .description {width: 55%; font-size: 13px; min-width: 375px;}
+
+  }
+
+}
+
+.frame-real-content {
+  padding: $base-mobile-side-margin * 2 $base-mobile-side-margin * 2 ($navigation-bar-height + $base-mobile-side-margin * 2) ;
+  h1 {
+    font-size: 62px;
+    margin-bottom: $base-mobile-side-margin;
+  }
+  p {font-size: 22px;}
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $base-mobile-side-margin;
+  margin-top: $base-mobile-side-margin;
+  .item {
+    width: 100%;
+    height: 30vh;
+    background: red;
+  }
 }

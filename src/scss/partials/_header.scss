@@ -1,33 +1,58 @@
 .navigation-bar {
-  height: 50px;
+  height: $navigation-bar-height;
   position: absolute;
   bottom: 0; right: 0;
   width: 100%;
   z-index: 1;
   color: #333;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 0 $base-mobile-side-margin * 2;
   box-shadow: 0 0 10px 2px rgba(1, 1, 1, 0.1);
 
+  .navigation-bar-link {
+    font-size: 18px;
+  }
+
   .link-more {
     position: absolute; right: $base-mobile-side-margin * 2;
     z-index: 3;
-    height: 50px;
-    line-height: 50px;
+    height: $navigation-bar-height;
+    line-height: $navigation-bar-height;
+    top: 0;
+    .icon-title {margin-right: $base-mobile-side-margin;}
+
+    svg {position: relative; top: 3px;}
+
+    @at-root body.infowindow-open .link-more  {
+      text-decoration: underline;
+    }
+    @at-root body.infowindow-open .link-more svg {
+      transform: rotate(180deg);
+    }
+
+    @at-root body.infowindow-open .link-more {
+      .icon-title-close {display: inline-block}
+      .icon-title-open {display: none}
+    }
+
+    @at-root body:not(.infowindow-open) .link-more {
+      .icon-title-close {display: none}
+      .icon-title-open {display: inline-block}
+    }
+
   }
 
   .homepage-link {
-    height: 50px;
+    height: $navigation-bar-height;
     display: flex;
     align-items: center;
     svg {fill: #333;}
     position: relative;
     z-index: 3;
-    font-size: 18px;
-    .icon-title {display: inline-block; margin-left: 5px; }
-    position: absolute; left: $base-mobile-side-margin * 2;
+    .icon-title {display: inline-block; margin-left: $base-mobile-side-margin; }
+    position: absolute; left: $base-mobile-side-margin * 2; top: 0;
   }
 
   .background-bar {
@@ -35,12 +60,12 @@
     width: 100%;
     position: absolute;
     top: 0; right: 0;
-    height: 54px;
+    height: $navigation-bar-height;
     z-index: 2;
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
     position: relative;
     z-index: 3;
@@ -48,18 +73,27 @@
 
 }
 
-.navigation-bar {display: none;}
+
+.navigation-layer-mdh,
+.navigation-layer-historylab,
+.navigation-layer-archive {display: none}
 
 body.mdh-map {
   .navigation-bar {display: flex;}
 
   .navigation-layer-mdh {display: flex;}
-  .navigation-layer-historylab {display: none}
+
 }
 
 body.historylab {
   .navigation-bar {display: flex;}
 
-  .navigation-layer-mdh {display: none;}
   .navigation-layer-historylab {display: flex}
 }
+
+body.archive {
+  .navigation-bar {display: flex;}
+
+  .navigation-layer-archive {display: flex}
+}
+

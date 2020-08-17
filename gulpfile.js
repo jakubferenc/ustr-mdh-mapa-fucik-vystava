@@ -33,8 +33,7 @@ const version = pkg.version;
 
 const jsonNastaveni = JSON.parse(fs.readFileSync('./nastaveni.json'));
 
-const ftpSettings = require('./ftp.json');
-const ftp = require( 'vinyl-ftp' );
+
 const changed = require('gulp-changed');
 
 
@@ -204,7 +203,7 @@ const config = {
   },
   // PUG
   pug: {
-    pretty: true
+    pretty: false
   },
   // ROLLUP
   rollup: {
@@ -327,7 +326,4 @@ gulp.watch(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'], gulp.series('images'));
 gulp.task('build', gulp.series('clean', 'pug', 'sass', 'js', 'images'));
 
 // GULP:default
-gulp.task('default', gulp.series('build', (cb) => {
-  cb();
-  return process.exit(1);
-}));
+gulp.task('default', gulp.series('build'));

@@ -1,4 +1,4 @@
-import { __addClass, __removeClass } from './lib/utils/utils';
+import { __addClass, __removeClass, __toggleClass } from './lib/utils/utils';
 
 const domLoad = () => {
 
@@ -28,6 +28,10 @@ const domLoad = () => {
         __addClass($body, 'historylab');
       }
 
+      if (relReference === 'archive') {
+        __addClass($body, 'archive');
+      }
+
       return false;
 
     });
@@ -41,7 +45,21 @@ const domLoad = () => {
 
       __removeClass($body, 'mdh-map');
       __removeClass($body, 'historylab');
+      __removeClass($body, 'archive');
 
+      return false;
+
+    });
+
+  });
+
+  const $buttonMore = document.querySelectorAll('.link-more');
+  Array.from($buttonMore).forEach( ($button) => {
+    $button.addEventListener('click', (e) => {
+
+      const $relEl = document.querySelector($button.getAttribute('rel'));
+      __toggleClass($relEl, 'is-open');
+      __toggleClass($body, 'infowindow-open');
       return false;
 
     });
