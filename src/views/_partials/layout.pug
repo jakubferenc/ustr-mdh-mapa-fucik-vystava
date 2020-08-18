@@ -65,24 +65,24 @@ html(lang="cs")
 
     block header
 
-    body(class=bodyClass)
+  body(class=bodyClass)
 
-      block svg
-        <!-- inject:svg -->
+    block svg
+      <!-- inject:svg -->
 
-        <!-- endinject -->
+      <!-- endinject -->
 
-      block head
-        include ./header.pug
+    block head
+      include ./header.pug
 
-      block main
+    block main
 
-      block foot
-        include ./footer.pug
+    block foot
+      include ./footer.pug
 
 
-      block javascript
+    block javascript
 
-        script(src="assets/js/app.build.js?" + Math.floor(Date.now() / 1000))
+      script(src="assets/js/app.build.js?" + Math.floor(Date.now() / 1000))
 
 
