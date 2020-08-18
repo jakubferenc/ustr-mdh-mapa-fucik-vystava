@@ -33,7 +33,8 @@ const version = pkg.version;
 
 const jsonNastaveni = JSON.parse(fs.readFileSync('./nastaveni.json'));
 
-
+const ftpSettings = require('./ftp.json');
+const ftp = require( 'vinyl-ftp' );
 const changed = require('gulp-changed');
 
 
@@ -322,6 +323,23 @@ gulp.task('images', (cb) => {
   gulp.src('src/images/**/*.{jpg,png,svg,gif}')
     .pipe(gulp.dest('dist/assets/images'));
   cb();
+});
+
+gulp.task('deployFtp', () => {
+
+  const conn = ftp.create( {
+    host: ftpSettings.ftp.host,
+    user: ftpSettings.ftp.user,
+    password: ftpSettings.ftp.password,
+    parallel: 10,
+    timeOffset: ftpSettings.ftp.time
+  });
+
+  return gulp.src( ftpSettings.globs, {base: ftpSettings.base, buffer: false})
+    .pipe(conn.newerOrDifferentSize(ftpSettings.ftp.dir))
+    .pipe(conn.dest(ftpSettings.ftp.dir))
+    .pipe(browserSync.stream());
+
 });
 
 

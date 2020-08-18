@@ -67,6 +67,7 @@ const domLoad = () => {
 
   });
 
+  const $frameArchive = document.querySelector('.frame-archive');
   const $gallery = document.querySelector('[data-component="gallery"]');
 
   const zooming = new Zooming({
@@ -93,10 +94,13 @@ const domLoad = () => {
         galleryContainer.appendChild(newOverlay);
       }
 
+      __addClass($frameArchive, 'image-open');
+
     },
     onClose: function (target) {
       const galleryOverlay = document.querySelector('.gallery-overlay');
       __addClass(galleryOverlay, 'is-hidden');
+      __removeClass($frameArchive, 'image-open');
     }
   });
   zooming.listen('.img-zoomable');

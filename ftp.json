@@ -1,0 +1,14 @@
+{
+  "deploy" : true,
+  "proxy" : "",
+  "globs" : [ "!.git", "dist/**/*"],
+  "base": "./dist",
+  "ftp" : {
+    "host" : "www3.ustrcr.cz",
+    "user" : "defaulthistorylab",
+    "password" : "Tajne1234Heslo",
+    "dir" : "/web/vystavy/repor-tvar-julia-fucika",
+    "time" : 5000
+  }
+}
+
