@@ -74,6 +74,7 @@
     "gulp": "^4.0.2",
     "huntjs": "^5.0.0",
     "seamless-scroll-polyfill": "^1.1.0",
-    "svgstore": "^3.0.0-2"
+    "svgstore": "^3.0.0-2",
+    "zooming": "^2.1.1"
   }
 }

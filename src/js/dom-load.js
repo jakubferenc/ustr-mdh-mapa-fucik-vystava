@@ -1,4 +1,5 @@
 import { __addClass, __removeClass, __toggleClass } from './lib/utils/utils';
+import Zooming from 'zooming';
 
 const domLoad = () => {
 
@@ -66,6 +67,39 @@ const domLoad = () => {
 
   });
 
+  const $gallery = document.querySelector('[data-component="gallery"]');
+
+  const zooming = new Zooming({
+    zIndex: -1,
+    onOpen: function (target) {
+      target.style.zIndex = '99';
+
+      const galleryOverlay = document.querySelector('.gallery-overlay');
+
+      // we have already opened once the gallery and overlay exists
+      if (galleryOverlay) {
+
+        __removeClass(galleryOverlay, 'is-hidden');
+
+      } else {
+
+        const overlay = document.querySelector('body').querySelector('div[style]');
+        const newOverlay = overlay.cloneNode(false);
+        newOverlay.style.zIndex = '1';
+        __addClass(newOverlay, 'gallery-overlay');
+
+
+        const galleryContainer = target.parentElement.parentElement;
+        galleryContainer.appendChild(newOverlay);
+      }
+
+    },
+    onClose: function (target) {
+      const galleryOverlay = document.querySelector('.gallery-overlay');
+      __addClass(galleryOverlay, 'is-hidden');
+    }
+  });
+  zooming.listen('.img-zoomable');
 
 };
 

@@ -264,6 +264,10 @@ gulp.task('clean-dist-article', (done) => {
   return del(['dist/article'], done);
 });
 
+gulp.task('test', (cb) => {
+
+});
+
 // SERVER
 gulp.task('serve', () => {
   return startBrowserSync();
@@ -274,19 +278,21 @@ gulp.task('reload', () => {
 });
 
 // pug:index & pug:home (pug -> html)
-gulp.task('pug', () => {
-  return gulp.src(['src/views/**/*.pug'])
+gulp.task('pug', (cb) => {
+  gulp.src(['src/views/**/*.pug'])
     .pipe($.pug(config.pug))
     .pipe(gulp.dest('dist/'))
     .pipe(browserSync.stream());
-  });
+
+  cb();
+});
 
 gulp.watch(['src/views/**/*.pug'], gulp.series('pug', 'reload'));
 gulp.watch('nastaveni.json', gulp.series('pug', 'reload'));
 
 // SASS
-gulp.task('sass', () => {
-  return gulp.src('src/scss/main.scss')
+gulp.task('sass', (cb) => {
+  gulp.src('src/scss/main.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass(config.sass).on('error', $.sass.logError))
     .pipe($.sourcemaps.write(gulp.dest('dist/assets/css')))
@@ -298,20 +304,24 @@ gulp.task('sass', () => {
     .pipe(browserSync.reload({
       stream: true,
     }));
+
+  cb();
 });
 gulp.watch('src/scss/**/*.scss', gulp.series('sass', 'reload'));
 
 
-gulp.task('js', async () => {
+gulp.task('js', async (cb) => {
   const bundle = await rollup(config.rollup.bundle);
-  return bundle.write(config.rollup.output);
+  bundle.write(config.rollup.output);
+  cb();
 });
 gulp.watch('src/js/**/*.js', gulp.series('js', 'reload'));
 
 // IMAGES
-gulp.task('images', () => {
-  return gulp.src('src/images/**/*.{jpg,png,svg,gif}')
+gulp.task('images', (cb) => {
+  gulp.src('src/images/**/*.{jpg,png,svg,gif}')
     .pipe(gulp.dest('dist/assets/images'));
+  cb();
 });
 
 
