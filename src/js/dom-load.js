@@ -84,7 +84,8 @@ const domLoad = () => {
 
       } else {
 
-        const overlay = document.querySelector('body').querySelector('div[style]');
+        const overlay = document.querySelector('body > div[style]');
+        console.log(overlay);
         const newOverlay = overlay.cloneNode(false);
         newOverlay.style.zIndex = '1';
         __addClass(newOverlay, 'gallery-overlay');
