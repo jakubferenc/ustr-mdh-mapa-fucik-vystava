@@ -12,14 +12,8 @@
     display: flex;
     align-items: center;
 
-    &:nth-child(1),
-    &:nth-child(4) {
-      background-color: #eee;
-    }
-
-    &:nth-child(2),
     &:nth-child(3) {
-      background-color: #FAFAFA;
+      background-color: #eee;
     }
 
     &:nth-child(2n) {
@@ -27,7 +21,7 @@
     }
 
     .content {
-      width: 50%;
+      width: 75%;
       margin: 0 auto;
     }
 
@@ -39,18 +33,43 @@
     p {
       font-size: 24px;
       line-height: 1.4;
-      width: 75%;
+      width: 66%;
     }
 
+    &.mdh-mapa {
+      background-color: #FAFAFA;
+      background-image: url(../images/fucik-hlava.png);
+      background-size: contain;
+      background-position: right -20px;
+      background-repeat: no-repeat;
+      .button {
+        background-color: #E46B2A;
+        color: #fff;
+      }
+    }
 
     &.historylab {
       background-color: #fdf2f1;
+      background-image: url(../images/historylab-illustration-hero-2.png);
+      background-size: 48%;
+      background-position: bottom right;
+      background-repeat: no-repeat;
+
+
       .logo {width: 300px;}
 
       .button {
         background-color: #5352a6;
         color: #fce4e3;
       }
+    }
+
+
+    &.archive {
+      background-image: url(../images/section-archive-bg.png);
+      background-size: 30%;
+      background-position: center right;
+      background-repeat: no-repeat;
     }
 
     &.tiraz p {
@@ -63,7 +82,6 @@
     background-color: #000;
     color: #fff;
     padding: .4rem 1.6rem;
-    margin-bottom: 1.6rem;
     font-size: 1rem;
     height: 3.2rem;
     border: 1px solid rgba(0,0,0,0);
@@ -93,7 +111,7 @@ iframe {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding-bottom: 50px;
+  padding-bottom: $navigation-bar-height;
 
 }
 
@@ -126,6 +144,16 @@ body.historylab .frame-historylab,
 body.archive .frame-archive {
   opacity: 1;
   z-index: 2;
+}
+
+.frame-mdh {
+  .map-hide-controls {
+    height: 46px;
+    position: absolute; top: 0; right: 0;
+    width: 100px;
+    background: #4D6A79;
+    z-index: 0;
+  }
 }
 
 body.mdh-map .frame-mdh  {}
@@ -243,6 +271,6 @@ body.archive .frame-archive.image-open  {
 }
 .tiraz-container {
   background-color: #eee;
-  padding: $base-mobile-side-margin * 4 0 $base-mobile-side-margin * 4;
+  padding: $base-mobile-side-margin * 4 0 $base-mobile-side-margin * 6;
   .excerpt-container {margin: 0 auto;}
 }
