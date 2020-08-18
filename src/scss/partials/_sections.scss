@@ -44,7 +44,13 @@
 
 
     &.historylab {
+      background-color: #fdf2f1;
       .logo {width: 300px;}
+
+      .button {
+        background-color: #5352a6;
+        color: #fce4e3;
+      }
     }
 
     &.tiraz p {
@@ -65,7 +71,8 @@
     box-shadow: 0 0.4rem 0.8rem rgba(28,19,18,.5);
     transition: background-color .2s ease,color .2s ease,
     box-shadow .2s ease;
-    width: 50%;
+    width: 60%;
+
   }
 
 }
