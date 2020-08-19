@@ -9,12 +9,17 @@ const domLoad = () => {
   const $body = d.body;
 
   // init
+
   const $buttons = document.querySelectorAll('.dashboard .button');
   const $buttonBackToDashboard = document.querySelectorAll('.homepage-link');
 
   const $mdhMapIframe = document.querySelector('.frame-mdh iframe');
   const $mdhIframe = document.querySelector('.frame-historylab iframe');
 
+  // prevent context menu
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // define listeners
   Array.from($buttons).forEach( ($button) => {
 
     $button.addEventListener('click', (e) => {
