@@ -93,6 +93,10 @@ const domLoad = () => {
       console.log("grab");
       return false;
     },
+    onClose: function(target) {
+      console.log("close");
+      return false;
+    },
     onOpen: function (target) {
       target.style.zIndex = '99';
 
