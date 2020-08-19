@@ -1,4 +1,4 @@
-import { __addClass, __removeClass, __toggleClass } from './lib/utils/utils';
+import { __addClass, __removeClass, __toggleClass, __triggerEvent } from './lib/utils/utils';
 import Zooming from 'zooming';
 
 const domLoad = () => {
@@ -86,21 +86,19 @@ const domLoad = () => {
   const zooming = new Zooming({
     zIndex: -1,
     enableDrag: false,
-    onRelease: function() {
-      console.log("release");
-      return false;
+    onRelease: function(target) {
+
+      zooming.close();
+     __triggerEvent(target, 'click');
     },
     onBeforeGrab: function(target) {
-      console.log("on before release");
-      return false;
+
     },
     onGrab: function(target) {
-      console.log("grab");
-      return false;
+
     },
     onClose: function(target) {
-      console.log("close");
-      return false;
+
     },
     onOpen: function (target) {
       target.style.zIndex = '99';
@@ -129,7 +127,7 @@ const domLoad = () => {
 
     },
     onClose: function (target) {
-      const galleryOverlay = document.querySelector('.gallery-overlay');
+     const galleryOverlay = document.querySelector('.gallery-overlay');
       __addClass(galleryOverlay, 'is-hidden');
       __removeClass($frameArchive, 'image-open');
     }
