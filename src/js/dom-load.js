@@ -9,10 +9,11 @@ const domLoad = () => {
   const $body = d.body;
 
   // init
-
   const $buttons = document.querySelectorAll('.dashboard .button');
-
   const $buttonBackToDashboard = document.querySelectorAll('.homepage-link');
+
+  const $mdhMapIframe = document.querySelector('.frame-mdh iframe');
+  const $mdhIframe = document.querySelector('.frame-historylab iframe');
 
   Array.from($buttons).forEach( ($button) => {
 
@@ -22,10 +23,17 @@ const domLoad = () => {
       console.log(relReference);
 
       if (relReference === 'mdh') {
+        $mdhMapIframe.src = $mdhMapIframe.src;
+
+        const $relEl = document.querySelector('.julius-fucik-map-window-info');
+        __removeClass($relEl, 'is-open');
+        __removeClass($body, 'infowindow-open');
         __addClass($body, 'mdh-map');
       }
 
       if (relReference === 'historylab') {
+
+        $mdhIframe.src = $mdhIframe.src;
         __addClass($body, 'historylab');
       }
 
@@ -72,6 +80,19 @@ const domLoad = () => {
 
   const zooming = new Zooming({
     zIndex: -1,
+    enableDrag: false,
+    onRelease: function() {
+      console.log("release");
+      return false;
+    },
+    onBeforeGrab: function(target) {
+      console.log("on before release");
+      return false;
+    },
+    onGrab: function(target) {
+      console.log("grab");
+      return false;
+    },
     onOpen: function (target) {
       target.style.zIndex = '99';
 
