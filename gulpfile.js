@@ -288,8 +288,6 @@ gulp.task('pug', (cb) => {
   cb();
 });
 
-gulp.watch(['src/views/**/*.pug'], gulp.series('pug', 'reload'));
-gulp.watch('nastaveni.json', gulp.series('pug', 'reload'));
 
 // SASS
 gulp.task('sass', (cb) => {
@@ -308,7 +306,6 @@ gulp.task('sass', (cb) => {
 
   cb();
 });
-gulp.watch('src/scss/**/*.scss', gulp.series('sass', 'reload'));
 
 
 gulp.task('js', async (cb) => {
@@ -316,7 +313,6 @@ gulp.task('js', async (cb) => {
   bundle.write(config.rollup.output);
   cb();
 });
-gulp.watch('src/js/**/*.js', gulp.series('js', 'reload'));
 
 // IMAGES
 gulp.task('images', (cb) => {
@@ -342,16 +338,22 @@ gulp.task('deployFtp', () => {
 
 });
 
+gulp.task('watch', () => {
 
-gulp.watch(['site.webmanifest'], gulp.series('pug'));
-gulp.watch('src/js/**/*.js', gulp.series('js', browserSync.reload));
-gulp.watch('src/scss/**/*.scss', gulp.series('sass'));
-gulp.watch(['src/views/**/*.pug'], gulp.series('pug'));
-gulp.watch('src/*.html', gulp.series(browserSync.reload));
-gulp.watch(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'], gulp.series('images'));
+  gulp.watch(['site.webmanifest'], gulp.series('pug'));
+  gulp.watch('src/js/**/*.js', gulp.series('js', 'reload'));
+  gulp.watch('src/scss/**/*.scss', gulp.series('sass', 'reload'));
+  gulp.watch(['src/views/**/*.pug'], gulp.series('pug', 'reload'));
+  gulp.watch('nastaveni.json', gulp.series('pug', 'reload'));
+  gulp.watch('src/*.html', gulp.series(browserSync.reload));
+  gulp.watch(['src/images/**/*.+(png|jpg|jpeg|gif|svg)'], gulp.series('images'));
+
+});
+
+
 
 // GULP:build
 gulp.task('build', gulp.series('clean', 'pug', 'sass', 'js', 'images'));
 
 // GULP:default
-gulp.task('default', gulp.series('build'));
+gulp.task('default', gulp.series('build', 'watch', 'serve'));
